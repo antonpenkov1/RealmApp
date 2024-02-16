@@ -79,14 +79,11 @@ final class TasksViewController: UITableViewController {
             style: .normal,
             title: indexPath.section == 0 ? "Done" : "Undone"
         ) { [unowned self] _, _, isDone in
-
             storageManager.done(task)
-
             currentTasks = taskList.tasks.filter("isComplete = false")
             completedTasks = taskList.tasks.filter("isComplete = true")
 
             tableView.moveRow(at: indexPath, to: IndexPath(row: 0, section: indexPath.section == 0 ? 1 : 0 ))
-            
             isDone(true)
         }
         
@@ -98,10 +95,6 @@ final class TasksViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-    }
-
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        true
     }
 }
 
@@ -122,7 +115,6 @@ extension TasksViewController {
                 if let task, let completion {
                     storageManager.edit(task, newTitle: taskTitle, newNote: taskNote)
                     completion()
-                    // TODO: - edit task
                     return
                 }
                 createTask(withTitle: taskTitle, andNote: taskNote)

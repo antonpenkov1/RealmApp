@@ -92,7 +92,6 @@ final class StorageManager {
         }
     }
     
-    
     // MARK: - Private methods
     private func write(completion: () -> Void) {
         do {
